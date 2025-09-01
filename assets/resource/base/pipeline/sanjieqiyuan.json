@@ -200,12 +200,15 @@
     },
     "活动-三界奇缘-开始答题": {
         "recognition": "TemplateMatch",
-        "template": "richangdati/sjqy_daan.png",
+        "template": [
+            "richangdati/sjqy_daan.png",
+            "richangdati/sjqy_daan1.png"
+        ],
         "roi": [
-            470,
-            346,
-            44,
-            51
+            450,
+            340,
+            227,
+            92
         ],
         "pre_delay": 200,
         "action": "Click",
