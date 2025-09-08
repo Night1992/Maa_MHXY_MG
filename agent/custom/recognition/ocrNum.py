@@ -2,6 +2,7 @@ from maa.agent.agent_server import AgentServer
 from maa.custom_recognition  import CustomRecognition
 from maa.context import Context
 from utils import logger
+import re
 
 
 @AgentServer.custom_recognition("OCRNum")
@@ -51,3 +52,45 @@ class OCRNum(CustomRecognition):
         except ValueError:
             logger.info("识别活跃度错误", s)
             return CustomRecognition.AnalyzeResult(box=(0,0,0,0),detail="识别活跃度错误")
+
+
+@AgentServer.custom_recognition("OCRVitality")
+class OCRVitality(CustomRecognition):
+    def analyze(
+         self,
+         context: Context,
+         argv: CustomRecognition.AnalyzeArg,
+     ) -> CustomRecognition.AnalyzeResult:
+        """
+        识别活力，并判断点击打工次数
+        "recommended roi" : [380,103,542,46]
+        """
+        logger.info("进入识别活力agnet")
+        image1 = context.tasker.controller.post_screencap().wait().get()
+        recoNum =  context.run_recognition(
+            "识别活力",
+            image1,
+            pipeline_override={
+                "识别活力":{"roi" :  [380,103,542,46],
+                              "expected":[""],
+                              "recognition": "OCR"
+                            }
+                }
+
+            )
+        if not recoNum or not recoNum.all_results:
+            logger.info("没有识别到活力")
+            return CustomRecognition.AnalyzeResult(box=(0,0,0,0),detail="没有识别到活力")
+        for res in recoNum.all_results:
+            strnum = re.match(r'^(\d+)/', res.text)
+            huoli = int(strnum.group(1))
+            logger.info(f"活力为: {huoli}")
+            # 点击次数
+            num=huoli // 100
+            if num == 0:
+                logger.info("活力不足，无需打工")
+                return CustomRecognition.AnalyzeResult(box=(0,0,0,0),detail="活力不足，无需打工")
+            else:
+                for i in range(num):
+                    context.run_task("点击打工")
+        return CustomRecognition.AnalyzeResult(box=(0,0,0,0),detail="活力打工完成")
