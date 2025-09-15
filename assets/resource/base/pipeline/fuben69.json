@@ -502,6 +502,12 @@
             "fuben/fubentiaoguo3.png",
             "fuben/fubentiaoguo4.png"
         ],
+        "roi": [
+            1185,
+            4,
+            94,
+            78
+        ],
         "pre_delay": 500,
         "action": "Click",
         "post_delay": 500
