@@ -147,6 +147,10 @@
             "name": "启动游戏",
             "entry": "start",
             "doc": "启动游戏,登录默认账号角色"
+        },
+        {
+            "name": "趣味鉴赏",
+            "entry": "quweijianshang"
         }
     ],
     "option": {
