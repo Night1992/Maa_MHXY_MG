@@ -151,6 +151,11 @@
         {
             "name": "趣味鉴赏",
             "entry": "quweijianshang"
+        },
+        {
+            "name": "迷魂塔（公测）",
+            "entry": "mihunta",
+            "doc": "需要用户手动组队后，在开始运行任务"
         }
     ],
     "option": {

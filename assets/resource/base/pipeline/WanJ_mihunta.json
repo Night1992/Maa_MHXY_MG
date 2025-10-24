@@ -163,7 +163,10 @@
     "迷魂塔-等待开始": {},
     "活动-迷魂塔-开始": {
         "recognition": "TemplateMatch",
-        "template": [],
+        "template": [
+            "wanjian/mihunta_kaishi1.png",
+            "wanjian/mihunta_kaishi2.png"
+        ],
         "roi": [
             313,
             69,
@@ -179,9 +182,122 @@
         "expected": [
             "参加"
         ],
-        "pre_delay": 2500,
+        "pre_delay": 1000,
         "action": "Click",
+        "post_delay": 4000,
         "roi": "活动-迷魂塔-开始",
-        "next": []
+        "next": [
+            "点击前往迷魂塔"
+        ]
+    },
+    "点击前往迷魂塔": {
+        "recognition": "OCR",
+        "expected": [
+            "前往迷魂塔"
+        ],
+        "roi": [
+            932,
+            163,
+            312,
+            337
+        ],
+        "action": "Click",
+        "post_delay": 2000,
+        "next": [
+            "进入迷魂塔-图片",
+            "进入迷魂塔-ocr"
+        ]
+    },
+    "进入迷魂塔-图片": {
+        "recognition": "TemplateMatch",
+        "template": [
+            "wanjian/mihunta_zhujiemian.png"
+        ],
+        "roi": [
+            4,
+            5,
+            75,
+            78
+        ],
+        "next": [
+            "迷魂塔完成-ocr",
+            "迷魂塔完成-图片"
+        ],
+        "interrupt": [
+            "点击勇闯迷魂塔",
+            "战斗中-等待100秒"
+        ]
+    },
+    "进入迷魂塔-ocr": {
+        "recognition": "OCR",
+        "expected": [
+            "迷魂塔1层"
+        ],
+        "roi": [
+            104,
+            22,
+            122,
+            31
+        ],
+        "next": [
+            "迷魂塔完成-ocr",
+            "迷魂塔完成-图片"
+        ],
+        "interrupt": [
+            "点击勇闯迷魂塔",
+            "战斗中-等待100秒"
+        ]
+    },
+    "点击勇闯迷魂塔": {
+        "recognition": "OCR",
+        "expected": [
+            "勇闯迷魂塔"
+        ],
+        "roi": [
+            1034,
+            163,
+            239,
+            332
+        ],
+        "action": "Click",
+        "post_delay": 6000,
+        "next": [
+            "迷魂塔-点击确定传送"
+        ]
+    },
+    "迷魂塔-点击确定传送": {
+        "recognition": "OCR",
+        "expected": "确定传送",
+        "roi": [
+            917,
+            410,
+            335,
+            102
+        ],
+        "action": "Click"
+    },
+    "迷魂塔完成-ocr": {
+        "recognition": "OCR",
+        "expected": [
+            "迷魂塔10层"
+        ],
+        "roi": [
+            106,
+            22,
+            110,
+            33
+        ]
+    },
+    "迷魂塔完成-图片": {
+        "recognition": "TemplateMatch",
+        "template": [
+            "wanjian/mihunta_wanchengjiemian.png"
+        ],
+        "roi": [
+            3,
+            5,
+            74,
+            75
+        ]
     }
 }
