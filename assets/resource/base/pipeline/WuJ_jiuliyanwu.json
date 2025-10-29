@@ -170,13 +170,27 @@
         "action": "Click",
         "post_delay": 4000,
         "next": [
-            "点击九黎演武使-ocr"
+            "点击九黎演武使-图片"
         ]
     },
     "点击九黎演武使-ocr": {
         "recognition": "OCR",
         "expected": [
             "九黎演武使"
+        ],
+        "action": "Click",
+        "post_delay": 3000,
+        "next": [
+            "点击开始演武"
+        ]
+    },
+    "点击九黎演武使-图片": {
+        "recognition": "TemplateMatch",
+        "template": [
+            "wujian/yanwushi1.png",
+            "wujian/yanwushi2.png",
+            "wujian/yanwushi3.png",
+            "wujian/yanwushi4.png"
         ],
         "action": "Click",
         "post_delay": 3000,
@@ -224,15 +238,16 @@
             "准备阶段"
         ],
         "roi": [
-            506,
-            19,
-            252,
-            63
+            544,
+            11,
+            222,
+            103
         ],
         "next": [
             "九黎演武场"
         ],
         "interrupt": [
+            "演武-选择阵法",
             "演武-选择第一个阵容角色"
         ]
     },
@@ -264,6 +279,25 @@
         "action": "Click",
         "post_delay": 1000
     },
+    "演武-选择阵法": {
+        "recognition": "OCR",
+        "expected": "请选择你的小队阵法",
+        "roi": [
+            526,
+            144,
+            263,
+            47
+        ],
+        "pre_delay": 1000,
+        "action": "Click",
+        "target": [
+            577,
+            564,
+            141,
+            49
+        ],
+        "post_delay": 1000
+    },
     "九黎演武场": {
         "recognition": "OCR",
         "expected": [
@@ -276,6 +310,10 @@
             51
         ],
         "next": [
+            "演武-完成",
+            "演武失败三次"
+        ],
+        "interrupt": [
             "演武-开始匹配"
         ]
     },
@@ -306,16 +344,14 @@
         ],
         "post_delay": 1500,
         "next": [
-            "演武-完成",
-            "演武失败三次"
-        ],
-        "interrupt": [
             "演武-开始挑战"
         ]
     },
     "演武-开始挑战": {
         "recognition": "OCR",
-        "expected": "开始挑战",
+        "expected": [
+            "开始挑战"
+        ],
         "roi": [
             843,
             606,
@@ -331,9 +367,13 @@
         ]
     },
     "演武-单次数据显示": {
-        "recognition": "TemplateMatch",
-        "template": [
-            "wujian/shengli4.png"
+        "recognition": "OCR",
+        "expected": "点击空白处进入下一阶段",
+        "roi": [
+            504,
+            667,
+            281,
+            53
         ],
         "pre_delay": 1000,
         "action": "Click",
@@ -357,10 +397,23 @@
         "action": "Click",
         "post_delay": 2000,
         "next": [
-            "演武-选择第一个角色升级"
+            "演武-选择第一个角色升级",
+            "演武-选择第三个角色升级",
+            "演武-选择第二个角色升级"
         ]
     },
     "演武-选择第一个角色升级": {
+        "inverse": true,
+        "recognition": "OCR",
+        "expected": [
+            "10级"
+        ],
+        "roi": [
+            197,
+            404,
+            70,
+            42
+        ],
         "action": "Click",
         "target": [
             225,
@@ -373,6 +426,49 @@
             "演武-角色升级-确定"
         ]
     },
+    "演武-选择第二个角色升级": {
+        "recognition": "OCR",
+        "expected": [
+            "10级"
+        ],
+        "roi": [
+            197,
+            404,
+            70,
+            42
+        ],
+        "action": "Click",
+        "target": [
+            370,
+            303,
+            126,
+            108
+        ],
+        "post_delay": 1000,
+        "next": [
+            "演武-角色升级-确定"
+        ]
+    },
+    "演武-选择第三个角色升级": {
+        "recognition": "OCR",
+        "expected": [
+            "10级"
+        ],
+        "roi": [
+            386,
+            400,
+            86,
+            46
+        ],
+        "action": "Click",
+        "target": [
+            582,
+            319,
+            76,
+            59
+        ],
+        "post_delay": 1000
+    },
     "演武-角色升级-确定": {
         "recognition": "OCR",
         "expected": [
@@ -380,16 +476,63 @@
         ],
         "pre_delay": 1000,
         "action": "Click",
+        "post_delay": 1000,
+        "next": [
+            "演武-升到10级确定",
+            "演武-角色升级-关闭升级提示"
+        ]
+    },
+    "演武-升到10级确定": {
+        "recognition": "TemplateMatch",
+        "template": [
+            "wujian/shengdao10ji.png"
+        ],
+        "roi": [
+            409,
+            288,
+            444,
+            94
+        ],
+        "pre_delay": 1000,
+        "action": "Click",
+        "target": [
+            674,
+            409,
+            143,
+            48
+        ],
+        "post_delay": 1000,
+        "next": [
+            "演武-角色升级-关闭升级提示"
+        ]
+    },
+    "演武-角色升级-关闭升级提示": {
+        "recognition": "TemplateMatch",
+        "template": [
+            "wujian/shengji.png",
+            "wujian/shengji2.png"
+        ],
+        "roi": [
+            414,
+            45,
+            424,
+            554
+        ],
+        "threshold": 0.9,
+        "pre_delay": 1000,
+        "action": "Click",
         "post_delay": 1000
     },
     "演武失败三次": {
         "recognition": "TemplateMatch",
-        "template": [],
+        "template": [
+            "wujian/shibai3ci.png"
+        ],
         "roi": [
-            949,
-            530,
-            144,
-            55
+            1039,
+            534,
+            51,
+            49
         ],
         "next": [
             "panduan_zhujiemian"
@@ -406,6 +549,7 @@
             449,
             111
         ],
+        "threshold": 0.9,
         "next": [
             "panduan_zhujiemian"
         ]
