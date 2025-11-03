@@ -255,7 +255,7 @@ class sjqy_tiku_V2(CustomRecognition):
         NotAnswerCount = 0
         while i < 30:
             i = i+1
-            logger.info(f"第{i}次识别三界奇缘题目")
+            # logger.info(f"第{i}次识别三界奇缘题目")
             #识别三界奇缘题目
             image1 = context.tasker.controller.post_screencap().wait().get()
             reco_detail = context.run_recognition(
@@ -274,7 +274,7 @@ class sjqy_tiku_V2(CustomRecognition):
             if not reco_detail or not reco_detail.all_results:
                 # logger.info("没有识别到题目")
                 logger.info(f"未在题库中搜索到答案次数:{NotAnswerCount}，请反馈开发者填充题库。")
-                return CustomRecognition.AnalyzeResult(box=(0,0,0,0),detail="未识别到题目")
+                return CustomRecognition.AnalyzeResult(box=(0,0,0,0),detail="答题结束")
             all_results= reco_detail.all_results
             #按照box进行排序
             sorted_results= sort_ocr_results_by_position(all_results)
@@ -321,6 +321,10 @@ class sjqy_tiku_V2(CustomRecognition):
                 click_job = new_context.tasker.controller.post_click(center_x, center_y)
                 click_job.wait()  # 等待点击操作完成
                 time.sleep(2)
+            else:#没找到答案，点击的一个
+                time.sleep(2)
+                context.tasker.controller.post_click(500, 344).wait()
+                time.sleep(1)
 
         logger.info(f"未在题库中搜索到答案次数:{NotAnswerCount}，请反馈开发者填充题库。")
         return CustomRecognition.AnalyzeResult(box=(0,0,0,0),detail="答题结束")
