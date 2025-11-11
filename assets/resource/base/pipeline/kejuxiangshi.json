@@ -115,6 +115,7 @@
             "richangdati/kejuxiangshi_weikaishi.png",
             "richangdati/kejuxiangshi_weikaishi2.png"
         ],
+        "threshold": 0.9,
         "post_delay": 200,
         "next": [
             "panduan_zhujiemian"
@@ -128,7 +129,7 @@
             "richangdati/kejuxiangshi3.png",
             "richangdati/kejuxiangshi4.png"
         ],
-        "threshold": 0.8,
+        "threshold": 0.9,
         "next": [
             "活动-科举乡试-开始-点击参加"
         ]

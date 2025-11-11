@@ -118,9 +118,10 @@ class AIAnswer(CustomRecognition):
                                                                 }
                                                 }
                             )
-            for res in reco_detail_C.all_results:
-                C =res.text
-                # logger.info(f"C:{C}")
+            if reco_detail_C:
+                for res in reco_detail_C.all_results:
+                    C =res.text
+                    # logger.info(f"C:{C}")
             
             # 科举乡试答案d
             reco_detail_D=context.run_recognition(
@@ -132,9 +133,10 @@ class AIAnswer(CustomRecognition):
                                                                 }
                                                 }
                             )
-            for res in reco_detail_D.all_results:
-                D =res.text
-                # logger.info(f"D:{D}")
+            if reco_detail_D:
+                for res in reco_detail_D.all_results:
+                    D =res.text
+                    # logger.info(f"D:{D}")
             
             answer = {"A":A,
                       "B":B,
