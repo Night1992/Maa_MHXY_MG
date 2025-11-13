@@ -21,6 +21,7 @@
         ],
         "pre_delay": 200,
         "action": "ClickKey",
+        "post_delay": 2000,
         "key": [
             57,
             48
@@ -288,13 +289,46 @@
         ],
         "next": [
             "队伍-人员已满-且未有暂离/离线"
+        ],
+        "interrupt": [
+            "队伍-有暂离/离线"
         ]
+    },
+    "队伍-有暂离/离线": {
+        "recognition": "OCR",
+        "expected": [
+            "离线"
+        ],
+        "roi": [
+            341,
+            432,
+            757,
+            41
+        ],
+        "action": "Click",
+        "post_delay": 1000,
+        "next": [
+            "队伍-有暂离/离线-点击请离队伍"
+        ]
+    },
+    "队伍-有暂离/离线-点击请离队伍": {
+        "recognition": "OCR",
+        "expected": [
+            "请离队伍"
+        ],
+        "roi": [
+            336,
+            153,
+            767,
+            295
+        ],
+        "pre_delay": 1000,
+        "action": "Click"
     },
     "队伍-人员已满-且未有暂离/离线": {
         "inverse": true,
         "recognition": "OCR",
         "expected": [
-            "暂离",
             "离线"
         ],
         "roi": [
@@ -358,7 +392,7 @@
                 ]
             },
             {
-                "starting": 1000,
+                "starting": 1500,
                 "begin": [
                     796,
                     194,
