@@ -163,7 +163,7 @@
             "advanced": [
                 "抓鬼轮次选择"
             ],
-            "doc": "如果在（抓鬼进入轮次选择）中选择进入轮次选择，请在高级选项中输入需要执行的轮次，默认2轮"
+            "doc": "1.如果在（抓鬼进入轮次选择）中选择进入轮次选择，请在高级选项中输入需要执行的轮次，默认2轮。2.每轮结束判断队伍人员是否少人"
         },
         {
             "name": "活力打工",
@@ -419,13 +419,13 @@
             }
         },
         "Deepseek_apikey": {
-            "field": "text",
+            "field": "apikey",
             "type": "string",
             "default": "",
             "pipeline_override": {
                 "AIapikey": {
                     "custom_recognition_param": {
-                        "apikey": "{text}"
+                        "apikey": "{apikey}"
                     }
                 }
             }
